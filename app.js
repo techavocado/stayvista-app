@@ -177,17 +177,14 @@ app.get("/demouser",async(req,res)=>{
 })
 
 //map all the routes matching with listing with the required listing
-app.use("/listings",ListingRouter)
-app.use("/listings/:id/reviews",ReviewRouter)
-app.use("/",UserRouter)
-
-
+app.use("/listings", ListingRouter);
+app.use("/listings/:id/reviews", ReviewRouter);
 
 
 app.get("/", (req, res) => {
     res.redirect("/listings");
 });
-
+app.use("/", UserRouter);
 
 app.get("/create",isLoggedIn, async (req, res) => {
     res.render("create.ejs")
