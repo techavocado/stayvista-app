@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5 text-center">
+
+        <!-- Heading -->
+        <h1 class="fw-bold mb-4">User Profile</h1>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="card shadow-lg rounded-4 p-4 text-center" style="max-width: 600px; width: 100%;">
+
+                <!-- Avatar -->
+                <div class="mb-3">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+                         class="rounded-circle shadow" 
+                         width="100">
+                </div>
+
+                <!-- Username -->
+                <h3 class="fw-bold mb-1"><%= username %></h3>
+
+                <!-- Email -->
+                <p class="text-muted mb-3"><%= email %></p>
+
+                <hr>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2 mt-3">
+                    <a href="/listings" class="btn btn-dark w-50">
+                        Home
+                    </a>
+
+                    <a href="/logout" class="btn btn-outline-danger w-50">
+                        Logout
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

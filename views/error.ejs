@@ -1,0 +1,11 @@
+<% layout("layouts/boilerplate") %>
+
+    <div class="custom-alert mt-4">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-text">
+            <%= message %>
+        </div>
+        <button class="close-alert" onclick="this.parentElement.remove(); window.location.href='/listings';">
+            &times;
+        </button>
+    </div>

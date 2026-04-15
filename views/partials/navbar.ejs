@@ -1,0 +1,71 @@
+<nav
+    class="custom-nav px-4 py-3 border-bottom bg-white d-flex align-items-center justify-content-between sticky-top position-relative">
+
+    <a href="/listings" class="logo d-flex align-items-center gap-2 text-decoration-none">
+        <img src="/images/logo5.png" alt="logo" style="height: 35px;">
+        <span class="brand-name fs-4 fw-bold text-danger">StayVista</span>
+    </a>
+
+
+<!-- search bar -->
+    <div class="search-bar-wrapper d-none d-md-block position-absolute start-50 translate-middle-x">
+    
+    <form action="/listings" method="GET" class="d-inline-flex align-items-center border rounded-pill shadow-sm p-1 bg-white m-0" style="transition: box-shadow 0.2s;">
+
+        <span class="px-3 fw-semibold text-dark" style="font-size: 0.85rem;">Anywhere</span>
+        <div class="vr"></div>
+
+        <span class="px-3 fw-semibold text-dark" style="font-size: 0.85rem;">Any week</span>
+        <div class="vr"></div>
+
+        <input name="searchtitle" type="text" class="border-0 bg-transparent px-3 text-dark"
+            placeholder="Search destinations"
+            style="font-size: 0.85rem; outline: none; box-shadow: none; max-width: 130px;">
+
+        <button type="submit"
+            class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center ms-2 border-0"
+            style="width: 32px; height: 32px; cursor: pointer;">
+            <i class="fa-solid fa-magnifying-glass" style="font-size: 0.8rem;"></i>
+        </button>
+
+    </form>
+    
+</div>
+
+    <div class="nav-links d-flex align-items-center gap-3">
+
+        <a href="/listings"
+            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
+            style="font-size: 0.85rem;">Home</a>
+        <!-- <a href="/listings"
+            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
+            style="font-size: 0.85rem;">All Listings</a> -->
+        <a href="/create"
+            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
+            style="font-size: 0.85rem;">Add new Listing</a>
+
+        <div class="d-flex align-items-center gap-2 ms-1">
+
+            <% if(!currUser){ %>
+                <a href="/signup" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
+                    style="font-size: 0.85rem;">Sign Up</a>
+                <a href="/login" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
+                    style="font-size: 0.85rem;">Log In</a>
+                <% } %>
+
+                    <% if(currUser){ %>
+                        <a href="/logout"
+                            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
+                            style="font-size: 0.85rem;">Logout</a>
+
+                        <a href="/profile" class="ms-1">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                class="rounded-circle border shadow-sm"
+                                style="width: 30px; height: 30px; object-fit: cover;" alt="Profile">
+                        </a>
+                        <% } %>
+
+        </div>
+
+    </div>
+</nav>

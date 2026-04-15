@@ -1,0 +1,282 @@
+<% layout("layouts/boilerplate") %>
+<div class="page">
+    <div class="show-container">
+
+        <!-- Image -->
+        <div class="image-box">
+            <img src="<%= data.image.url %>" alt="listing">
+        </div>
+
+        <!-- Details -->
+        <div class="details-box">
+            <h1>
+                <%= data.title %>
+            </h1>
+
+            <p class="location">
+                📍 <%= data.location %>, <%= data.country %>
+            </p>
+
+            <p class="price">
+                ₹<%= data.price.toLocaleString("en-IN") %> <span>/ night</span>
+            </p>
+
+            <p class="desc">
+                <%= data.description %>
+            </p>
+
+            <% if(currUser && data.owner._id.toString()===currUser._id.toString()) { %>
+                <div class="btn-group">
+                    <a href="/listings/<%= data._id %>/edit" class="edit-btn">Edit</a>
+
+                    <form method="POST" action="/listings/<%= data._id %>?_method=DELETE">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                </div>
+                <% } %>
+
+                    <!-- Owner -->
+                    <div class="card shadow-sm p-3 mt-4 rounded-4" style="max-width: 400px;">
+                        <h5 class="fw-bold mb-3">Owner Details</h5>
+
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="rounded-circle"
+                                style="width: 50px; height: 50px; object-fit: cover;">
+
+                            <div>
+                                <h6 class="mb-1 fw-semibold">
+                                    <%= data.owner.username %>
+                                </h6>
+                                <p class="text-muted small mb-0">
+                                    <%= data.owner.email %>
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+        </div>
+
+        
+    </div>
+
+    <!-- ================= REVIEW SECTION ================= -->
+
+   <div class="container my-5">
+
+    <!-- ================= ADD REVIEW ================= -->
+    <% if(currUser){ %>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 col-xl-11">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-4">⭐ Add Your Review</h4>
+
+                    <form method="POST" action="/listings/<%= data._id %>/reviews"
+                          class="needs-validation" novalidate>
+
+                        <!-- Rating -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold mb-2">Rating</label>
+
+                            <fieldset class="starability-slot">
+                                <input type="radio" id="no-rate" class="input-no-rate"
+                                       name="review[rating]" value="" checked />
+
+                                <input type="radio" id="rate1" name="review[rating]" value="1" />
+                                <label for="rate1">1 star</label>
+
+                                <input type="radio" id="rate2" name="review[rating]" value="2" />
+                                <label for="rate2">2 stars</label>
+
+                                <input type="radio" id="rate3" name="review[rating]" value="3" />
+                                <label for="rate3">3 stars</label>
+
+                                <input type="radio" id="rate4" name="review[rating]" value="4" />
+                                <label for="rate4">4 stars</label>
+
+                                <input type="radio" id="rate5" name="review[rating]" value="5" />
+                                <label for="rate5">5 stars</label>
+                            </fieldset>
+
+                            <div class="invalid-feedback">Select a rating</div>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Comment</label>
+
+                            <textarea name="review[comment]"
+                                      class="form-control rounded-3"
+                                      rows="4"
+                                      placeholder="Share your experience..."
+                                      required></textarea>
+
+                            <div class="invalid-feedback">Enter a review</div>
+                        </div>
+
+                        <!-- Button -->
+                        <button type="submit" class="btn btn-dark w-100 rounded-3 py-2">
+                            Submit Review
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <% } %>
+
+    <!-- ================= REVIEWS ================= -->
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+
+            <h4 class="fw-bold mb-4">💬 Reviews</h4>
+
+            <div class="row g-4">
+
+                <% for(let review of data.reviews){ %>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                        <div class="card-body d-flex flex-column">
+
+                            <!-- User -->
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                     class="rounded-circle me-2"
+                                     style="width: 35px; height: 35px;">
+
+                                <h6 class="mb-0 fw-semibold">
+                                    @<%= review.author.username %>
+                                </h6>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="mb-2">
+                                <span class="fw-semibold">
+                                    ⭐ <%= review.rating %>/5
+                                </span>
+                                <p class="starability-result mb-0"
+                                   data-rating="<%= review.rating %>"></p>
+                            </div>
+
+                            <!-- Comment -->
+                            <p class="text-muted small flex-grow-1">
+                                <%= review.comment %>
+                            </p>
+
+                            <!-- Delete -->
+                            <% if(currUser && review.author._id.toString() === currUser._id.toString()) { %>
+                                <form method="POST"
+                                      action="/listings/<%= data._id %>/reviews/<%= review._id %>/delete?_method=DELETE">
+                                    <button class="btn btn-outline-danger btn-sm w-100 rounded-3">
+                                        Delete
+                                    </button>
+                                </form>
+                            <% } %>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    <div class="container my-5">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-md-10">
+
+                <div class="card shadow-lg border-0 rounded-4">
+
+                    <div class="card-body p-4">
+
+                        <!-- Heading -->
+                        <h4 class="fw-bold mb-3">
+                            📍 Where you'll be
+                        </h4>
+
+                        <!-- Map -->
+                        <div id="map" class="w-100 rounded-3" style="height: 500px;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+    <!-- Validation Script -->
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+
+
+
+        // 1. API Token aur Data lena (Quotes hata diye hain)
+        const mapToken = "<%= process.env.MAPTILER_API_KEY %>";
+
+        // Yahan quotes nahi aayenge, taaki ye seedha JS Object bane
+        const listing = JSON.parse('<%- JSON.stringify(data) %>');
+
+        maptilersdk.config.apiKey = mapToken;
+
+        // 2. Map Initialize karna
+        // Safety Check: Agar database mein geometry hai toh use karo, warna Delhi (Fallback)
+        const coordinates = (listing.geometry && listing.geometry.coordinates)
+            ? listing.geometry.coordinates
+            : [77.2090, 28.6139];
+
+        const map = new maptilersdk.Map({
+            container: 'map',
+            style: maptilersdk.MapStyle.STREETS,
+            center: coordinates,
+            zoom: 12
+        });
+
+        // 3. Popup aur Marker
+        const popup = new maptilersdk.Popup({ offset: 25 })
+            .setHTML(`<h4>${listing.location}</h4><p>Exact location provided after booking</p>`);
+
+        new maptilersdk.Marker({ color: "#fe424d" })
+            .setLngLat(coordinates)
+            .setPopup(popup)
+            .addTo(map);
+
+
+
+    </script>

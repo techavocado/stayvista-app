@@ -1,0 +1,26 @@
+/* Remove extra bootstrap spacing */
+.form-page label {
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.form-page input,
+.form-page textarea {
+    margin-bottom: 8px !important; /* reduce gap */
+}
+
+/* Row spacing fix */
+.row {
+    margin-top: 5px;
+    gap: 10px;
+}
+
+/* Remove bootstrap default margin */
+.form-control {
+    margin-bottom: 0 !important;
+}
+
+/* Button spacing */
+.btn-group {
+    margin-top: 10px;
+}

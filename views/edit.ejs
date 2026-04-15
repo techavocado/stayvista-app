@@ -1,0 +1,122 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-5 d-flex justify-content-center edit-card">
+    
+    <div class="card shadow p-4 rounded-4" style="max-width: 650px; width: 100%;">
+
+        <h3 class="text-center mb-4 fw-bold">Edit Listing</h3>
+
+        <form method="post" 
+              action="/listings/<%= data._id %>?_method=PATCH" 
+              class="needs-validation" 
+              enctype="multipart/form-data"
+              novalidate>
+
+            <!-- Title -->
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name="title" 
+                    value="<%= data.title %>" 
+                    >
+                <div class="invalid-feedback">Enter title</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea 
+                    class="form-control" 
+                    name="description" 
+                    rows="2"
+                    required><%= data.description %></textarea>
+                <div class="invalid-feedback">Enter Description</div>
+            </div>
+
+            <div><img class="editimg" src="<%= data.image.url %>" alt=""></div>
+
+            <!-- Image -->
+            <div class="mb-3">
+                <label class="form-label">Image file</label>
+                <input 
+                    class="form-control" 
+                    type="file" 
+                    name="listing[image]" 
+                    value="<%= data.image?.url || '' %>" 
+                    >
+            </div>
+
+           
+
+            <!-- Price & Country -->
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label class="form-label">Price</label>
+                    <input 
+                        class="form-control" 
+                        type="number" 
+                        name="price" 
+                        value="<%= data.price %>" 
+                        required>
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label class="form-label">Country</label>
+                    <input 
+                        class="form-control" 
+                        type="text" 
+                        name="country" 
+                        value="<%= data.country %>" 
+                        required>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name="location" 
+                    value="<%= data.location %>" 
+                    required>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-dark w-100">
+                    Update
+                </button>
+
+                <a href="/listings/<%= data._id %>/show" 
+                   class="btn btn-outline-secondary w-100">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+(() => {
+  'use strict'
+  const forms = document.querySelectorAll('.needs-validation')
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+    })
+  })
+})()
+</script>
+

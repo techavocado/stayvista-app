@@ -1,0 +1,825 @@
+/* ===== GLOBAL STYLES ===== */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;              
+    flex-direction: column;     
+    min-height: 100vh;
+}
+main {
+    flex: 1;
+}
+
+.page-content {
+    flex: 1;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-inner {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    height: 70px;
+}
+
+
+/* ===== NAVBAR ===== */
+.custom-nav {
+    display: flex !important;
+    justify-content: space-between !important; 
+    align-items: center !important;
+    padding: 15px 2% !important;     /* 🔥 5% ko hatakar 2% kar diya (Space ekdum kam) */
+    background: white !important;
+    border-bottom: 1px solid #eee !important;
+    width: 100% !important;          
+    box-sizing: border-box !important;
+}
+
+/* Logo Fixes */
+.custom-nav .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;             /* 🔥 Logo aur text ke beech thoda gap */
+}
+
+.custom-nav .logo img {
+    height: 50px !important;
+    width: auto !important;
+    display: block !important;
+}
+
+.custom-nav .brand-name {
+    font-size: 24px !important;
+    color: #1C7C74 !important;       /* Airbnb jaisa pink/red color, chahiye toh #1C7C74 rakh lena */
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+
+.nav-links {
+    display: flex;
+     gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ff385c;
+}
+
+/* ===== LISTINGS ALIGNMENT ===== */
+.heading {
+    max-width: 100%;
+    margin: 35px auto 10px;
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0 2%;                  /* 🔥 Yahan bhi 6% ko 2% kar diya */
+    box-sizing: border-box;
+}
+
+.listings-container {
+    width: 100%;              
+    max-width: 100%;        
+    margin: 0;           
+    padding: 20px 1%;               /* 🔥 Cards ke side ki space bhi 2% kar di */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;                      
+    box-sizing: border-box;
+}
+
+/* Card layout fix */
+.listing-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;             
+    display: flex;            
+    flex-direction: column;   
+}
+
+.listing-card:hover {
+    transform: translateY(-6px);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Image wrapper (Duplicate removed) */
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 260px;            
+    flex-shrink: 0;           
+}
+
+/* Image anti-stretch fix */
+.listing-img {
+    width: 100%;
+    height: 100%;             
+    object-fit: cover !important; 
+    object-position: center;  
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.listing-card:hover .listing-img {
+    transform: scale(1.05);
+}
+
+.heart {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    border-radius: 50%;
+    padding: 6px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.listing-info {
+    padding: 12px 10px 18px;
+}
+
+.listing-info h3 {
+    font-size: 15px;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.price {
+    color: #555;
+    font-size: 14px;
+}
+
+/* ===== SHOW PAGE (DETAILS) ===== */
+.show-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 50px;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+.image-box {
+    flex: 1 1 500px; 
+    max-width: 650px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details-box {
+    flex: 1 1 350px; 
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.details-box h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+}
+
+.details-box p {
+    margin: 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.details-box .price {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+.details-box .price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #777;
+}
+
+/* ===== BUTTONS ===== */
+.btn-group {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-group form {
+    margin: 0;
+}
+
+.edit-btn {
+    text-decoration: none;
+    background: #222;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    border: none;
+    display: inline-block;
+    transition: all 0.25s ease;
+}
+
+.edit-btn:hover {
+    background: #000;
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background: #ff385c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+    background: #e03150;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #eee;
+    color: #333;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #ddd;
+}
+
+.submit-btn {
+    margin-top: 10px;
+    width: fit-content;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff385c;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.submit-btn:hover {
+    background: #e03150;
+}
+
+/* ===== FORMS (CREATE / EDIT) - COMPACT & AESTHETIC ===== */
+.form-page {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.form-page h1 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.form-container {
+    max-width: 650px;       
+    margin: 40px auto;
+    background: white;
+    padding: 30px 35px;     
+    border-radius: 16px;    
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06); 
+}
+.form-container h1 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.form, .listing-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;              
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;     
+    font-weight: 500;
+    font-size: 13px;
+    color: #555;
+}
+
+.form input, .form textarea, 
+.listing-form input, .listing-form textarea, 
+.custom-input {
+    width: 100%;
+    padding: 10px 14px;     
+    margin-bottom: 0;       
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form input:focus, .form textarea:focus,
+.listing-form input:focus, .listing-form textarea:focus,
+.custom-input:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1); 
+}
+
+textarea {
+    height: 85px !important; 
+    resize: none;
+}
+
+.row {
+    display: flex;
+    gap: 15px; 
+}
+
+.col {
+    flex: 1;
+}
+
+.invalid-feedback, .valid-feedback {
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    width: 100%;
+    background: #eee;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;   
+    box-sizing: border-box;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-left {
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-links a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social a {
+    margin-left: 10px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE FIXES (MOBILE/TABLET) ===== */
+@media (max-width: 900px) {
+    .listings-container {
+        grid-template-columns: repeat(2, 1fr); /* Tablet pe 2 cards */
+    }
+}
+
+@media (max-width: 850px) {
+    .show-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .image-box {
+        max-width: 100%;
+        height: 350px; 
+    }
+
+    .details-box {
+        max-width: 100%;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .listings-container {
+        grid-template-columns: 1fr; /* Mobile pe 1 card */
+    }
+}
+
+/* ===== CUSTOM ALERTS (Premium Look) ===== */
+.custom-alert {
+    display: flex;
+    align-items: center;
+    background-color: #FFF0F2;      /* Soft pink background */
+    border-left: 5px solid #ff385c; /* Premium left accent border */
+    padding: 16px 20px;
+    border-radius: 12px;            /* Smooth rounded corners */
+    box-shadow: 0 4px 15px rgba(255, 56, 92, 0.1); /* Subtle glowing shadow */
+    max-width: 600px;               /* Width control */
+    margin: 0 auto 20px auto;       /* Center align */
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.alert-icon {
+    font-size: 18px;
+}
+
+.alert-text {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    margin: 0;
+}
+
+/* Close button style */
+.close-alert {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: 0.2s;
+}
+
+.close-alert:hover {
+    color: #ff385c;
+    transform: scale(1.1);
+}
+
+
+.review-section {
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.review-section h2 {
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+textarea, select {
+    width: 100%;
+    padding: 8px;
+}
+
+.review-btn {
+    background: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.review-sec-css{
+
+  
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+
+}
+
+.edit-card{
+    margin-bottom: 50px;
+
+}
+
+
+.editimg{
+    height: 200px;
+    width: 300px
+}
+
+/* Liquid Glass Button Base */
+.btn-glass {
+    position: relative;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    backdrop-filter: blur(12px); /* Background Blur */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Soft Border */
+    border-radius: 50px; /* Pill Shape */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Floating Effect */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0px;
+}
+
+/* Glossy Gradient Overlay */
+.btn-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: all 0.6s ease;
+}
+
+/* Hover Effects */
+.btn-glass:hover {
+    transform: translateY(-5px) scale(1.05); /* Floating Scale up */
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px 0 rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-glass:hover::before {
+    left: 100%; /* Shimmer effect on hover */
+}
+
+/* Active/Click Effect */
+.btn-glass:active {
+    transform: translateY(-2px) scale(0.98);
+}
+/* Navbar specific adjustments */
+.nav-glass-btn {
+    padding: 8px 20px !important; /* Height thodi kam ki hai */
+    font-size: 0.95rem !important;
+    margin-top: 5px; /* Navbar items ke sath center align karne ke liye */
+    margin-bottom: 5px;
+}
+
+
+/* css for filters */
+/* #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;      
+    justify-content: center;  
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    gap: 2.5rem; 
+}
+
+    .filter {
+        text-align: center;
+        opacity: 0.6;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        border-bottom: 2px solid black; 
+        padding-bottom: 5px;
+    }
+
+    .filter i {
+        font-size: 1.5rem; 
+        margin-bottom: 0.3rem;
+    }
+
+    .filter p {
+        font-size: 0.85rem;
+        margin: 0;
+        font-weight: 500;
+    } */
+
+    /* Main Wrapper */
+
+    /* Normal Filter Base */
+.filter {
+    flex: 0 0 auto;
+    text-align: center;
+    opacity: 0.6;
+    cursor: pointer;
+    width: 80px; 
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    
+    /* YEH DO LINES NAYI HAIN (Flicker Fix) */
+    border-bottom: 2px solid transparent; /* Pehle se invisible border */
+    padding-bottom: 5px; /* Pehle se padding */
+}
+
+/* Hover Effect */
+.filter:hover {
+    opacity: 1;
+    transform: scale(1.1); 
+    border-bottom: 2px solid black; /* Sirf border ka color aayega, height nahi badhegi */
+    /* yahan se padding hata di kyunki base mein de di hai */
+}
+    .filter-carousel-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        max-width: 800px; /* Thodi width badha di taaki circle mast dikhe */
+        overflow: hidden; /* Bahar ka area hide karne ke liye */
+        position: relative;
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    /* Container for items */
+    #filters-track {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 10px 0;
+        transition: transform 0.3s ease-in-out; /* Smooth sliding animation */
+    }
+
+    /* Individual Filter */
+    .filter {
+        flex: 0 0 auto;
+        text-align: center;
+        opacity: 0.6;
+        cursor: pointer;
+        width: 80px; 
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        transform: scale(1.1); /* Hover par thoda pop hoga */
+        border-bottom: 2px solid black;
+        padding-bottom: 5px;
+    }
+
+    .filter i {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+        display: block;
+    }
+
+    .filter p {
+        font-size: 0.85rem;
+        margin: 0;
+        font-weight: 500;
+    }
+
+    /* Arrow Buttons */
+    .scroll-btn {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 10;
+        flex-shrink: 0;
+        margin: 0 10px;
+        transition: all 0.2s ease;
+    }
+
+    .scroll-btn:hover {
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        background-color: #f8f9fa;
+        transform: scale(1.05);
+    }
+    
+    /* Container ko relative banaya taaki toggle iske andar free ghum sake */
+.filters-main-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Carousel ko EXACT center me rakhega */
+    margin: 1.5rem auto;
+    width: 100%;
+}
+
+/* Carousel ko wahi compact look */
+.filter-carousel-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Toggle Switch Container */
+.tax-toggle {
+    position: absolute; 
+    right: 0; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+    background-color: white;
+    margin-right: 50px;
+    
+    /* YEH HAI FIX: Flexbox aur gap overlap ko rok denge */
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tax-toggle:hover {
+    border: 1px solid black;
+    background-color: #f8f9fa;
+}
+
+/* Label (Text) ki styling */
+.toggle-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    white-space: nowrap; /* Text ko ek hi line mein rakhega */
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Switch par bhi pointer cursor ke liye */
+.toggle-switch-btn {
+    cursor: pointer;
+}
+/* Text ko thoda chota kiya taaki premium lage */
+.tax-toggle .form-check-label {
+    margin-right: 5px;
+    font-weight: 500;
+    font-size: 0.85rem; /* Font size chota kiya hai */
+    white-space: nowrap; /* Text ko 2 line me tutne se rokega */
+    cursor: pointer;
+}
+
+/* Mobile Screens ke liye setting taaki overlap na ho */
+@media (max-width: 990px) {
+    .filters-main-container {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .tax-toggle {
+        position: static; /* Phone me wapas normal position par aayega */
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
