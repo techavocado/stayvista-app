@@ -185,8 +185,7 @@ app.use("/",UserRouter)
 
 
 app.get("/", (req, res) => {
-    console.log("HOME HIT");
-    res.send("home working");
+    res.redirect("/listings");
 });
 
 
