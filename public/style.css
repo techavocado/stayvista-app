@@ -823,3 +823,228 @@ textarea, select {
         justify-content: space-between;
     }
 }
+
+
+/* new */
+
+/* 1. Main Container Logic */
+    .filters-main-container {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Laptop pe filters ko center rakhega */
+        padding: 0.5rem 4rem;
+        background-color: white;
+        position: relative; /* Tax toggle ko absolute placement dene ke liye */
+        min-height: 80px;
+    }
+
+    /* 2. Carousel Wrapper (Middle) */
+    .filter-carousel-wrapper {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        /* Laptop pe filters ki width fix rakhenge taaki center mein dikhe */
+        max-width: 700px; 
+        width: 100%;
+    }
+
+    /* 3. Tax Toggle (Right Side) */
+    .tax-toggle {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        height: fit-content;
+        position: absolute; /* Laptop par right mein chipkane ke liye */
+        right: 4rem;
+        background: white;
+        z-index: 5;
+    }
+
+    /* Filter Icons Styling */
+    #filters-track {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .filter {
+        text-align: center;
+        opacity: 0.7;
+        cursor: pointer;
+        min-width: fit-content;
+        border-bottom: 2px solid transparent;
+        transition: 0.2s;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        border-bottom: 2px solid #000;
+    }
+
+    .filter p {
+        font-size: 0.75rem;
+        margin: 5px 0 0 0;
+    }
+
+    /* Scroll Buttons Styling */
+    .scroll-btn {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+/* ****************************************** */
+/* MOBILE RESPONSIVENESS (Media Queries) */
+/* ****************************************** */
+
+@media (max-width: 1200px) {
+    /* Jab screen choti ho jaye aur toggle filter ke upar chadhne lage */
+    .tax-toggle {
+        right: 1.5rem; /* Margin kam kar do */
+    }
+    .filters-main-container {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    /* 1. Container ko compact karo */
+    .filters-main-container {
+        flex-direction: column; 
+        padding: 0.3rem 0.5rem; /* Vertical padding kam ki taaki height kam ho */
+        gap: 8px; /* Elements ke beech ka gap kam kiya */
+        justify-content: center;
+    }
+
+    /* 2. Scroll bar (Carousel) - Choti Width aur Height */
+    .filter-carousel-wrapper {
+        max-width: 280px; /* Thoda aur chota kiya taaki arrows ke liye safe space ho */
+        width: 92%;
+        height: 60px; /* Carousel ki height kam kar di */
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    /* 3. Filters Style (Chote Icons aur Text) */
+    .filter {
+        min-width: 65px; 
+    }
+
+    .filter i {
+        font-size: 1rem; /* Icons thode chote */
+    }
+
+    .filter p {
+        font-size: 0.65rem; /* Text size chota kiya */
+        margin-top: 2px;
+    }
+
+    /* 4. Buttons (Small & Compact) - Forcefully Visible */
+    .scroll-btn {
+        display: flex !important; 
+        width: 22px; /* Patle aur chote buttons */
+        height: 22px;
+        flex-shrink: 0;
+    }
+
+    .scroll-btn i {
+        font-size: 0.6rem;
+    }
+
+    /* 5. Filters track ka internal gap */
+    #filters-track {
+        gap: 1.2rem; 
+    }
+
+    /* 6. Tax Toggle (Sleek & Slim) */
+    .tax-toggle {
+        position: static;
+        width: 90%;
+        max-width: 320px;
+        margin: 0 auto;
+        justify-content: space-between;
+        padding: 0.4rem 0.8rem; /* Padding kam karke patla kiya */
+        border-radius: 10px;
+    }
+
+    .toggle-label {
+        font-size: 0.75rem; /* Label size chota kiya */
+    }
+
+    /* Toggle switch ka size bhi thoda compact */
+    .form-check-input {
+        width: 2.2em !important;
+        height: 1.1em !important;
+        margin-top: 0.2em !important;
+    }
+}
+
+/* Ekdum chote phones (iPhone SE) ke liye extra adjustment */
+@media (max-width: 350px) {
+    .filter-carousel-wrapper {
+        max-width: 250px;
+    }
+}
+
+
+/* for show ejs resopnsiveness */
+
+
+/* ========================================== */
+/* SIRF MOBILE KE LIYE FIX (Isse base code nahi badlega) */
+/* ========================================== */
+@media (max-width: 768px) {
+    .show-container {
+        margin: 20px auto; /* Mobile pe top margin thoda kam */
+        gap: 25px; /* Image aur details ke beech ka gap kam */
+        padding: 0 15px;
+    }
+
+    .image-box {
+        max-width: 100%; 
+        flex-basis: 100%; /* Mobile pe poori width lega */
+        height: 280px; /* Mobile pe image ki height thodi choti taaki text jaldi dikhe */
+    }
+
+    .details-box {
+        max-width: 100%;
+        flex-basis: 100%; /* Mobile pe text box bhi poori width lega */
+    }
+    
+    .details-box h1 {
+        font-size: 24px; /* Heading phone pe thodi choti */
+    }
+}
+
+/* ========================================== */
+/* MAHA-FIX FOR MOBILE (Image + Map) */
+/* ========================================== */
+@media (max-width: 768px) {
+    /* 1. Image Fix */
+    .image-box {
+        flex: none !important;      
+        width: 100% !important;     
+        height: 280px !important;   
+    }
+    
+    .image-box img {
+        height: 280px !important;   
+        object-fit: cover !important; 
+    }
+
+    /* 2. Map Fix (Mobile pe chota aur smooth) */
+    #map {
+        height: 280px !important; /* Map ki height strictly 280px kar di */
+        border-radius: 15px !important; /* Corners thode aur smooth kar diye */
+        margin-top: 10px !important; /* Upar se thoda gap taaki text se na chipke */
+    }
+}

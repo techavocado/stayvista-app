@@ -1,71 +1,109 @@
-<nav
-    class="custom-nav px-4 py-3 border-bottom bg-white d-flex align-items-center justify-content-between sticky-top position-relative">
+<nav class="custom-nav px-3 px-md-4 py-3 border-bottom bg-white d-flex align-items-center justify-content-between sticky-top">
 
-    <a href="/listings" class="logo d-flex align-items-center gap-2 text-decoration-none">
-        <img src="/images/logo5.png" alt="logo" style="height: 35px;">
-        <span class="brand-name fs-4 fw-bold text-danger">StayVista</span>
-    </a>
+    <a href="/listings" class="logo d-flex align-items-center gap-2 text-decoration-none flex-shrink-0">
+    <img src="/images/logo5.png" alt="logo" style="height: 32px;">
+    <span class="brand-name fs-4 fw-bold text-danger">StayVista</span>
+</a>
 
-
-<!-- search bar -->
     <div class="search-bar-wrapper d-none d-md-block position-absolute start-50 translate-middle-x">
-    
-    <form action="/listings" method="GET" class="d-inline-flex align-items-center border rounded-pill shadow-sm p-1 bg-white m-0" style="transition: box-shadow 0.2s;">
+        <form action="/listings" method="GET" class="d-inline-flex align-items-center border rounded-pill shadow-sm p-1 bg-white m-0" style="transition: box-shadow 0.2s;">
+            <span class="px-3 fw-semibold text-dark d-none d-lg-block" style="font-size: 0.85rem;">Anywhere</span>
+            <div class="vr d-none d-lg-block"></div>
+            <span class="px-3 fw-semibold text-dark d-none d-lg-block" style="font-size: 0.85rem;">Any week</span>
+            <div class="vr d-none d-lg-block"></div>
+            <input name="searchtitle" type="text" class="border-0 bg-transparent px-3 text-dark"
+                placeholder="Search destinations"
+                style="font-size: 0.85rem; outline: none; box-shadow: none; max-width: 130px;">
+            <button type="submit"
+                class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center ms-2 border-0"
+                style="width: 32px; height: 32px; cursor: pointer;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size: 0.8rem;"></i>
+            </button>
+        </form>
+    </div>
 
-        <span class="px-3 fw-semibold text-dark" style="font-size: 0.85rem;">Anywhere</span>
-        <div class="vr"></div>
+    <div class="nav-links d-flex align-items-center gap-2 gap-md-3">
+        
+        <a href="/listings" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1" style="font-size: 0.85rem;">
+            <i class="fa-solid fa-house d-md-none"></i>
+            <span class="d-none d-md-inline">Home</span>
+        </a>
 
-        <span class="px-3 fw-semibold text-dark" style="font-size: 0.85rem;">Any week</span>
-        <div class="vr"></div>
+        <a href="/create" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1" style="font-size: 0.85rem;">
+            <i class="fa-solid fa-plus d-md-none"></i>
+            <span class="d-none d-md-inline">Add Listing</span>
+        </a>
 
-        <input name="searchtitle" type="text" class="border-0 bg-transparent px-3 text-dark"
-            placeholder="Search destinations"
-            style="font-size: 0.85rem; outline: none; box-shadow: none; max-width: 130px;">
-
-        <button type="submit"
-            class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center ms-2 border-0"
-            style="width: 32px; height: 32px; cursor: pointer;">
-            <i class="fa-solid fa-magnifying-glass" style="font-size: 0.8rem;"></i>
-        </button>
-
-    </form>
-    
-</div>
-
-    <div class="nav-links d-flex align-items-center gap-3">
-
-        <a href="/listings"
-            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
-            style="font-size: 0.85rem;">Home</a>
-        <!-- <a href="/listings"
-            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
-            style="font-size: 0.85rem;">All Listings</a> -->
-        <a href="/create"
-            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium d-none d-lg-block px-2 py-1"
-            style="font-size: 0.85rem;">Add new Listing</a>
-
-        <div class="d-flex align-items-center gap-2 ms-1">
-
+        <div class="d-flex align-items-center gap-1 gap-md-2 ms-1">
             <% if(!currUser){ %>
-                <a href="/signup" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
-                    style="font-size: 0.85rem;">Sign Up</a>
                 <a href="/login" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
                     style="font-size: 0.85rem;">Log In</a>
-                <% } %>
+                <a href="/signup" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1 d-none d-sm-block"
+                    style="font-size: 0.85rem;">Sign Up</a>
+            <% } %>
 
-                    <% if(currUser){ %>
-                        <a href="/logout"
-                            class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
-                            style="font-size: 0.85rem;">Logout</a>
-
-                        <a href="/profile" class="ms-1">
-                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                                class="rounded-circle border shadow-sm"
-                                style="width: 30px; height: 30px; object-fit: cover;" alt="Profile">
-                        </a>
-                        <% } %>
-
+            <% if(currUser){ %>
+                <a href="/logout" class="btn-glass nav-glass-btn text-decoration-none text-dark fw-medium px-2 py-1"
+                    style="font-size: 0.85rem;">Logout</a>
+                <a href="/profile" class="ms-1">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                        class="rounded-circle border shadow-sm"
+                        style="width: 28px; height: 28px; object-fit: cover;" alt="Profile">
+                </a>
+            <% } %>
         </div>
-
     </div>
 </nav>
+
+<style>
+    /* Choti screens par height stable rakhne ke liye */
+@media (max-width: 576px) {
+    /* 1. Navbar ki height fix rakho */
+    .custom-nav {
+        padding-top: 8px !important;    /* Vertical padding kam ki */
+        padding-bottom: 8px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        height: 60px !important;       /* Height ko lock kar diya */
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* 2. Brand Name ko subtle banao */
+    .brand-name {
+        display: inline !important;    /* d-none ko override kiya */
+        font-size: 0.85rem !important; /* Size chota kiya taaki height na badhe */
+        line-height: 1 !important;     /* Extra spacing hatayi */
+        white-space: nowrap;           /* Text ko wrap hone se roka */
+    }
+
+    /* 3. Logo Image ka size balance karo */
+    .logo img {
+        height: 22px !important;       /* Icon thoda chota */
+    }
+
+    /* 4. Gap kam karo taaki sab ek line mein aayein */
+    .logo {
+        gap: 4px !important; 
+    }
+
+    .nav-links {
+        gap: 6px !important;           /* Links ke beech ka gap kam */
+    }
+
+    /* 5. Buttons ko thoda compact karo */
+    .nav-glass-btn {
+        padding: 4px 6px !important;   /* Buttons ki internal padding kam ki */
+        font-size: 0.75rem !important; /* Button text chota kiya */
+    }
+}
+
+/* Ekdum chote phones (iPhone SE) ke liye extra compact */
+@media (max-width: 380px) {
+    .brand-name {
+        display: none !important;      /* Bahut chote phone pe naam chupa do warna height badhegi */
+    }
+}
+
+
+</style>

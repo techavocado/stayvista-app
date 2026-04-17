@@ -73,7 +73,7 @@ passport.deserializeUser(User.deserializeUser())
 
 //flash middleware takes response from routes and stores success msg in res.locals
 app.use((req,res,next)=>{
-    res.locals.currUser = req.user;
+    res.locals.currUser = req.user || null;
     res.locals.success = req.flash("success")
     res.locals.error = req.flash("error")
     next()
@@ -244,9 +244,15 @@ app.post("/create",upload.single("listing[image]"), isLoggedIn, validateListing,
 
 
 //error handling middleware
+// Error handling middleware (app.js ke aakhri mein)
 app.use((err, req, res, next) => {
     let { status = 500, message = "Something went wrong" } = err;
     console.log(err.status, err.message);
-    // res.status(status).send(message);
+    
+    // FIX: Fallback variables taaki boilerplate aur navbar crash na ho
+    res.locals.currUser = req.user || null; 
+    res.locals.success = ""; // success aur error ko khali string set kar diya
+    res.locals.error = ""; 
+    
     return res.render("error.ejs", { message });
 });
