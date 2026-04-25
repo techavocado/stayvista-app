@@ -21,6 +21,7 @@ main {
     justify-content: space-between;  
     align-items: center;
     height: 70px;
+
 }
 
 
@@ -49,11 +50,29 @@ main {
     display: block !important;
 }
 
+
+
 .custom-nav .brand-name {
     font-size: 24px !important;
     color: #1C7C74 !important;       /* Airbnb jaisa pink/red color, chahiye toh #1C7C74 rakh lena */
     font-family: 'Poppins', sans-serif !important;
     font-weight: 600 !important;
+}
+
+
+/* 🔥 Mobile ke liye */
+@media (max-width: 768px) {
+    .brand-name {
+        font-size: 18px !important;
+         color: #1C7C74 !important;  
+    }
+}
+
+/* 🔥 Extra small devices (phones) */
+@media (max-width: 480px) {
+    .brand-name {
+        font-size: 16px !important;
+    }
 }
 
 
@@ -73,6 +92,8 @@ main {
 .nav-links a:hover {
     color: #ff385c;
 }
+
+
 
 /* ===== LISTINGS ALIGNMENT ===== */
 .heading {
@@ -756,6 +777,7 @@ textarea, select {
     justify-content: center; /* Carousel ko EXACT center me rakhega */
     margin: 1.5rem auto;
     width: 100%;
+    margin-bottom: 5px;
 }
 
 /* Carousel ko wahi compact look */
@@ -1046,5 +1068,499 @@ textarea, select {
         height: 280px !important; /* Map ki height strictly 280px kar di */
         border-radius: 15px !important; /* Corners thode aur smooth kar diye */
         margin-top: 10px !important; /* Upar se thoda gap taaki text se na chipke */
+    }
+}
+
+/* ============================================================
+   STAYVISTA — MOBILE RESPONSIVENESS PATCH
+   Target: max-width 768px ONLY
+   Desktop/laptop styles are NOT touched.
+   Add this block at the very END of your style.css
+   ============================================================ */
+
+/* -------------------------------------------------------
+   1. GLOBAL: Prevent horizontal overflow on all screens
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Every element respects the viewport */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+}
+
+/* -------------------------------------------------------
+   2. NAVBAR — Single-row app-style layout (Airbnb-like)
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Navbar: fixed height, single row, no wrap */
+    .custom-nav {
+        height: 60px !important;
+        padding: 0 12px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Logo group: logo image + brand name */
+    .custom-nav .logo {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;         /* Never collapse */
+        text-decoration: none !important;
+    }
+
+    .custom-nav .logo img {
+        height: 1px !important;
+        width: auto !important;
+    }
+   
+
+    /* Brand name: show it, keep it compact */
+    .custom-nav .brand-name {
+        display: inline !important;        /* Override any d-none */
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        white-space: nowrap !important;
+        line-height: 1 !important;
+        color: #1C7C74 !important;
+    }
+
+    /* Desktop search bar — hidden on mobile (search moves below) */
+    .search-bar-wrapper {
+        display: none !important;
+    }
+
+    /* Right-side nav links: icon-only, tight spacing */
+    .nav-links {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex-shrink: 0 !important;
+        flex-wrap: nowrap !important;
+    }
+
+    /* Each nav button: icon-only pill, no text */
+    .nav-glass-btn {
+        padding: 7px 10px !important;
+        font-size: 1rem !important;
+        border-radius: 50px !important;
+        background: rgba(0, 0, 0, 0.04) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        box-shadow: none !important;
+        color: #222 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        margin: 0 !important;
+        /* Reset glass hover bloat */
+        transform: none !important;
+        transition: background 0.2s ease !important;
+    }
+
+    .nav-glass-btn:hover {
+        background: rgba(0, 0, 0, 0.08) !important;
+        transform: none !important;
+        box-shadow: none !important;
+        color: #222 !important;
+    }
+
+    /* Force icons to show on mobile (they are hidden with d-md-none) */
+    .nav-glass-btn i {
+        font-size: 0.95rem !important;
+        display: inline !important;
+    }
+
+    /* Force text spans to hide on mobile */
+    .nav-glass-btn span.d-none.d-md-inline {
+        display: none !important;
+    }
+
+    /* Profile avatar */
+    .nav-links a img.rounded-circle {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    /* Auth buttons: Log In visible, Sign Up hidden to save space */
+    a[href="/signup"].d-none.d-sm-block {
+        display: none !important;
+    }
+
+    /* Auth buttons on mobile: compact */
+    a[href="/login"].nav-glass-btn,
+    a[href="/logout"].nav-glass-btn {
+        font-size: 0.75rem !important;
+        padding: 6px 10px !important;
+        height: 32px !important;
+        min-width: unset !important;
+        white-space: nowrap !important;
+    }
+}
+
+
+/* -------------------------------------------------------
+   3. MOBILE SEARCH BAR — Full-width row below navbar
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Unhide the search bar on mobile and reposition it */
+    .search-bar-wrapper {
+        display: block !important;         /* Override d-none */
+        position: static !important;       /* Take out of absolute positioning */
+        transform: none !important;        /* Remove translate-middle-x */
+        width: 100% !important;
+        padding: 8px 12px !important;
+        background: white !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    /* The form itself stretches full width */
+    .search-bar-wrapper form {
+        display: flex !important;
+        width: 100% !important;
+        border-radius: 50px !important;
+        padding: 4px 6px 4px 14px !important;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1) !important;
+        align-items: center !important;
+    }
+
+    /* Input takes all remaining space */
+    .search-bar-wrapper input[type="text"] {
+        flex: 1 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        font-size: 0.88rem !important;
+    }
+
+    /* Desktop-only text labels inside the search bar — hide them */
+    .search-bar-wrapper .vr,
+    .search-bar-wrapper span.d-none.d-lg-block {
+        display: none !important;
+    }
+
+    /* Search submit button */
+    .search-bar-wrapper button[type="submit"] {
+        flex-shrink: 0 !important;
+        width: 34px !important;
+        height: 34px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   4. FILTERS SECTION — Compact carousel on mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .filters-main-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 6px 8px !important;
+        gap: 6px !important;
+        justify-content: center !important;
+        min-height: unset !important;
+    }
+
+    .filter-carousel-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    /* Scroll arrows: small but visible */
+    .scroll-btn {
+        width: 28px !important;
+        height: 28px !important;
+        flex-shrink: 0 !important;
+        margin: 0 4px !important;
+    }
+
+    .scroll-btn i {
+        font-size: 0.65rem !important;
+    }
+
+    /* Filter icons: compact */
+    .filter {
+        min-width: 62px !important;
+        width: 62px !important;
+    }
+
+    .filter i {
+        font-size: 1.1rem !important;
+    }
+
+    .filter p {
+        font-size: 0.68rem !important;
+        margin-top: 3px !important;
+    }
+
+    #filters-track {
+        gap: 1rem !important;
+    }
+
+    /* Tax toggle: full width strip below carousel */
+    .tax-toggle {
+        position: static !important;
+        width: 94% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+        padding: 6px 14px !important;
+        border-radius: 10px !important;
+        justify-content: space-between !important;
+        right: unset !important;
+    }
+
+    .toggle-label {
+        font-size: 0.8rem !important;
+    }
+
+    .form-check-input {
+        width: 2em !important;
+        height: 1em !important;
+    }
+}
+
+/* -------------------------------------------------------
+   5. LISTINGS GRID — Single column, no overflow
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    /* Remove Bootstrap .container side padding bloat */
+    .listwaladiv .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .listings-container {
+        grid-template-columns: 1fr !important;  /* 1 card per row */
+        gap: 20px !important;
+        padding: 12px 14px !important;
+    }
+
+    /* Card: natural height, no fixed overflow issues */
+    .listing-card {
+        border-radius: 14px !important;
+    }
+
+    .image-wrapper {
+        height: 220px !important;
+    }
+
+    .listing-img {
+        height: 220px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .listing-info {
+        padding: 10px 12px 14px !important;
+    }
+
+    .listing-info h3 {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+
+    .price {
+        font-size: 13px !important;
+    }
+
+    /* Heart icon positioning */
+    .heart {
+        top: 10px !important;
+        right: 10px !important;
+        padding: 5px 9px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   6. FOOTER — Stack on mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .footer-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+
+    .footer-links a {
+        margin: 0 8px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   7. FORMS — Full width, proper padding on mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .form-container {
+        margin: 20px 12px !important;
+        padding: 20px 18px !important;
+        border-radius: 12px !important;
+    }
+
+    .form-page {
+        padding: 0 12px !important;
+    }
+
+    .row {
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    .btn-group {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   8. ALERT — Full width on mobile
+   ------------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .custom-alert {
+        margin: 10px 12px 14px !important;
+        max-width: 100% !important;
+        padding: 12px 14px !important;
+        border-radius: 10px !important;
+    }
+}
+
+/* ============================================================
+   STAYVISTA — TAX TOGGLE FIX PATCH
+   Paste this at the very END of your style.css (after mobile-responsive.css)
+   ============================================================ */
+
+/* Fix for Bootstrap form-switch not rendering on mobile */
+@media (max-width: 992px) {
+
+    /* 1. Make the toggle container actually flex and visible */
+    .tax-toggle {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 92% !important;
+        max-width: 420px !important;
+        margin: 0 auto 8px auto !important;
+        padding: 10px 16px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 12px !important;
+        background: white !important;
+        position: static !important;
+        right: unset !important;
+        gap: 12px !important;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
+    }
+
+    /* 2. Label text */
+    .toggle-label,
+    .tax-toggle .form-check-label {
+        font-size: 0.85rem !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        color: #222 !important;
+        flex: 1 !important;
+    }
+
+    /* 3. The form-check wrapper — must be visible and properly sized */
+    .tax-toggle .form-check {
+        display: flex !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: unset !important;
+    }
+
+    /* 4. The actual toggle input — THIS is what was invisible */
+    .tax-toggle .form-check-input,
+    #flexSwitchCheckDefault {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;  /* Bootstrap sets position:absolute sometimes */
+        width: 2.8em !important;
+        height: 1.4em !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important;
+
+        /* Force the Bootstrap switch appearance */
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        background-color: #ccc !important;
+        border-radius: 2em !important;
+        border: none !important;
+        outline: none !important;
+        transition: background-color 0.2s ease !important;
+        box-shadow: none !important;
+
+        /* The sliding circle (::before pseudo-element trick) */
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: left center !important;
+        background-size: 1.4em !important;
+    }
+
+    /* 5. When checked — green fill, circle moves right */
+    .tax-toggle .form-check-input:checked,
+    #flexSwitchCheckDefault:checked {
+        background-color: #1C7C74 !important;
+        background-position: right center !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+    }
+}
+
+/* ============================================================
+   STAYVISTA — SEARCH BAR → FILTER CAROUSEL SPACING FIX
+   Paste at the very END of your style.css
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* 1. Remove bottom padding/margin from the search bar wrapper */
+    .search-bar-wrapper {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* 2. Remove top gap from the filters container */
+    .filters-main-container {
+        margin-top: 0 !important;
+        padding-top: 6px !important;
+    }
+
+    /* 3. Kill any top margin on filter-carousel-wrapper */
+    .filter-carousel-wrapper {
+        margin-top: 0 !important;
+    }
+
+    /* 4. If your boilerplate or Bootstrap adds margin to the first child of main */
+    main > *:first-child,
+    .page-content > *:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 }

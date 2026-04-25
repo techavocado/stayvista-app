@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-//.env file!
 // if(process.env.NODE_ENV !="production"){
     require('dotenv').config()
 // }
@@ -108,24 +107,11 @@ main().then((res) => {
         console.log(err)
     })
 
-let port = 8080
+let port = 3000
 
 app.listen(port, () => {
     console.log(`"server is running on port ${port}"`)
 })
-
-//logger middleware
-
-// app.use((req, res, next) => {
-//     let responsetime = Date()
-//     console.log(req.method, req.path, responsetime, req.hostname)
-//     next()
-// })
-
-
-
-
-
 
 //wrapasync function
 
@@ -193,7 +179,6 @@ app.get("/create",isLoggedIn, async (req, res) => {
 app.post("/create",upload.single("listing[image]"), isLoggedIn, validateListing, asyncWrap(async (req, res) => {
     let data = req.body;
 
-    // 1. MapTiler Call (Ahmedabad wala logic)
     const maptilerUrl = `https://api.maptiler.com/geocoding/${encodeURIComponent(data.location)}.json?key=${mapToken}`;
     const response = await axios.get(maptilerUrl);
     
@@ -208,7 +193,6 @@ app.post("/create",upload.single("listing[image]"), isLoggedIn, validateListing,
         geometry: response.data.features[0].geometry
     };
 
-    // 2. Ab safe check ke andar image extract karein
     if (typeof req.file !== "undefined") {
         let url = req.file.path;
         let filename = req.file.filename;
@@ -220,7 +204,6 @@ app.post("/create",upload.single("listing[image]"), isLoggedIn, validateListing,
         
         console.log("Image Uploaded:", filename, url); 
     } else {
-        // Optional: Agar image nahi hai toh default set kar sakte ho
         obj.image = {
             url: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=2070&auto=format&fit=crop",
             filename: "defaultlistingimage"
@@ -234,24 +217,17 @@ app.post("/create",upload.single("listing[image]"), isLoggedIn, validateListing,
     res.redirect(redirectUrl);
 }));
 
-
-
-
 //for all other routes throw an error and catch it using middleware
 // app.all("/*splat", (req, res, next) => {
 //     next(new ExpressError(404, "Page not found"));
 // });
 
-
-//error handling middleware
-// Error handling middleware (app.js ke aakhri mein)
 app.use((err, req, res, next) => {
     let { status = 500, message = "Something went wrong" } = err;
     console.log(err.status, err.message);
     
-    // FIX: Fallback variables taaki boilerplate aur navbar crash na ho
     res.locals.currUser = req.user || null; 
-    res.locals.success = ""; // success aur error ko khali string set kar diya
+    res.locals.success = ""; 
     res.locals.error = ""; 
     
     return res.render("error.ejs", { message });
