@@ -1564,3 +1564,72 @@ textarea, select {
         padding-top: 0 !important;
     }
 }
+
+@media (max-width: 767px) {
+    .search-bar-wrapper {
+        display: none !important;
+    }
+
+    body.is-home-page .search-bar-wrapper {
+        display: block !important;
+        padding: 10px 15px !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    .sticky-top {
+        position: static !important;
+    }
+    
+    nav.custom-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: white;
+    }
+}
+
+@media (max-width: 767px) {
+    body:not(.is-home-page) main, 
+    body:not(.is-home-page) .container {
+        margin-top: 20px !important; 
+        padding-top: 10px !important;
+    }
+    nav.custom-nav {
+        position: sticky !important;
+        top: 0;
+        z-index: 1000;
+    }
+}
+
+@media (max-width: 767px) {
+    /* 1. Search bar hide logic (Same as before) */
+    .search-bar-wrapper {
+        display: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0 !important;
+        overflow: hidden;
+    }
+
+    /* 2. Home page par wapas dikhao */
+    body.is-home-page .search-bar-wrapper {
+        display: block !important;
+        height: auto !important;
+        padding: 10px 15px !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    /* 3. LOGIN/SIGNUP FIX: Inhe thoda gap do taaki navbar ke niche dikhein */
+    /* Hum 'body:not(.is-home-page)' ko hata kar specific gap de rahe hain */
+    main, .container {
+        margin-top: 15px !important; 
+    }
+
+    /* 4. SHOW PAGE SPECIFIC: Agar aap chahte ho Show page par gap NA ho, 
+       toh show.ejs ki main div par ek class 'show-page' add karke yahan target karo */
+    body.show-page-active main, 
+    body.show-page-active .container {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}

@@ -1,11 +1,17 @@
 <% layout("layouts/boilerplate") %>
 
+    <script>
+        document.body.classList.add("is-home-page");
+    </script>
+
     <div class="filters-main-container position-relative">
 
         <div class="filter-carousel-wrapper">
             <button class="scroll-btn" id="scrollLeftBtn">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
+
+
 
             <div style="overflow: hidden; width: 100%; max-width: 600px;">
                 <div id="filters-track">
@@ -102,29 +108,24 @@
             const track = document.getElementById('filters-track');
             const leftBtn = document.getElementById('scrollLeftBtn');
             const rightBtn = document.getElementById('scrollRightBtn');
-
-            // Filter ki width + gap calculate karna (approx 120px)
             const moveDistance = 120;
 
-            // Jab Right dabayein: Pehla item uthakar aakhri mein daal do (Circle forward)
             rightBtn.addEventListener('click', () => {
                 track.style.transition = "transform 0.3s ease-in-out";
                 track.style.transform = `translateX(-${moveDistance}px)`;
 
                 setTimeout(() => {
                     track.style.transition = "none";
-                    track.appendChild(track.firstElementChild); // Pehle ko last mein bhejo
+                    track.appendChild(track.firstElementChild); 
                     track.style.transform = "translateX(0)";
-                }, 300); // 300ms transition time ke barabar
+                }, 300); 
             });
 
-            // Jab Left dabayein: Aakhri item uthakar pehle par le aao (Circle backward)
             leftBtn.addEventListener('click', () => {
                 track.style.transition = "none";
-                track.prepend(track.lastElementChild); // Last ko first mein bhejo
+                track.prepend(track.lastElementChild); 
                 track.style.transform = `translateX(-${moveDistance}px)`;
 
-                // Thoda delay dekar smooth wapas laao
                 setTimeout(() => {
                     track.style.transition = "transform 0.3s ease-in-out";
                     track.style.transform = "translateX(0)";
@@ -137,27 +138,22 @@
             let startX = 0;
             let endX = 0;
 
-            // Jab finger screen par touch ho
             track.addEventListener('touchstart', (e) => {
                 startX = e.changedTouches[0].screenX;
             }, { passive: true });
 
-            // Jab finger screen se hate
             track.addEventListener('touchend', (e) => {
                 endX = e.changedTouches[0].screenX;
                 handleSwipe();
             }, { passive: true });
 
-            // Swipe ki direction check karke button click trigger karna
             function handleSwipe() {
-                const swipeThreshold = 40; // Kam se kam kitna lamba swipe hona chahiye
+                const swipeThreshold = 40; 
 
                 if (startX - endX > swipeThreshold) {
-                    // Finger ne Left swipe kiya -> Right wale items dikhao
                     rightBtn.click();
                 }
                 else if (endX - startX > swipeThreshold) {
-                    // Finger ne Right swipe kiya -> Left wale items dikhao
                     leftBtn.click();
                 }
             }
@@ -168,56 +164,48 @@
             let isTrackpadScrolling = false;
 
             track.addEventListener('wheel', (e) => {
-                // Check karo ki user Left/Right swipe kar raha hai ya Up/Down
                 if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                    e.preventDefault(); // Page ko horizontal hilne se roko
+                    e.preventDefault(); 
 
-                    // Agar pehle se scroll nahi chal raha, tabhi aage badho
                     if (!isTrackpadScrolling) {
                         if (e.deltaX > 0) {
-                            rightBtn.click(); // 2-finger Right Swipe
+                            rightBtn.click(); 
                         } else if (e.deltaX < 0) {
-                            leftBtn.click();  // 2-finger Left Swipe
+                            leftBtn.click();
                         }
 
-                        // COOLDOWN: Trackpad ek second mein 100 events bhejta hai.
-                        // Agar hum cooldown nahi lagayenge toh list slot-machine ki tarah ghumegi!
                         isTrackpadScrolling = true;
                         setTimeout(() => {
                             isTrackpadScrolling = false;
-                        }, 400); // 400ms ka delay (Animation time ke barabar)
+                        }, 400); 
                     }
                 }
             }, { passive: false });
 
 
             // ==========================================
-    // TAX TOGGLE SWITCH (Airbnb Style)
-    // ==========================================
-    
-    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-    
-    // Teeno elements ki list nikal lo
-    let basePrices = document.querySelectorAll(".base-price");
-    let totalPrices = document.querySelectorAll(".total-price");
-    let taxInfos = document.querySelectorAll(".tax-info");
+            // TAX TOGGLE SWITCH (Airbnb Style)
+            // ==========================================
 
-    taxSwitch.addEventListener("change", () => {
-        // Har listing card par loop chalayenge
-        for (let i = 0; i < basePrices.length; i++) {
-            
-            if (taxSwitch.checked) {
-                // Agar ON hai: Base chhupao, Total aur Info dikhao
-                basePrices[i].style.display = "none";
-                totalPrices[i].style.display = "inline";
-                taxInfos[i].style.display = "inline";
-            } else {
-                // Agar OFF hai: Base dikhao, Total aur Info chhupao
-                basePrices[i].style.display = "inline";
-                totalPrices[i].style.display = "none";
-                taxInfos[i].style.display = "none";
-            }
-            
-        }
-    });
+            let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+            let basePrices = document.querySelectorAll(".base-price");
+            let totalPrices = document.querySelectorAll(".total-price");
+            let taxInfos = document.querySelectorAll(".tax-info");
+
+            taxSwitch.addEventListener("change", () => {
+                for (let i = 0; i < basePrices.length; i++) {
+
+                    if (taxSwitch.checked) {
+                        basePrices[i].style.display = "none";
+                        totalPrices[i].style.display = "inline";
+                        taxInfos[i].style.display = "inline";
+                    } else {
+                        basePrices[i].style.display = "inline";
+                        totalPrices[i].style.display = "none";
+                        taxInfos[i].style.display = "none";
+                    }
+
+                }
+            });
         </script>
