@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/logo5.png" alt="StayVista Logo" width="80" />
+  <img src="public/images/logo5.png" alt="StayVista Logo" width="160" />
 </p>
 
 <h1 align="center">StayVista</h1>
